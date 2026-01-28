@@ -12,8 +12,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "FinAI - Intelligent Financial Assistant",
-  description: "AI-powered financial tracking and analytics system. Upload your invoices and let AI handle the rest.",
+  title: "UangKu - Asisten Keuangan Cerdas",
+  description: "Sistem pelacakan dan analitik keuangan berbasis AI. Upload struk Anda dan biarkan AI yang urus.",
+  icons: {
+    icon: '/logo.png?v=2',
+    apple: '/logo.png?v=2',
+  },
 };
 
 export default function RootLayout({ children }) {

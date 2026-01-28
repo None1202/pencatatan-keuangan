@@ -156,18 +156,18 @@ export default function Dashboard() {
             {/* Header */}
             <header className="flex justify-between items-center mb-10">
                 <div>
-                    <h1 className="hero-text">FinAI Dashboard</h1>
-                    <p>Your Intelligent Financial Assistant</p>
+                    <h1 className="hero-text">UangKu</h1>
+                    <p>Asisten Keuangan Cerdas Anda</p>
                 </div>
                 <div className="flex gap-4">
                     <div className="card text-center" style={{ padding: '1rem', minWidth: '120px' }}>
-                        <p className="input-label">Balance</p>
+                        <p className="input-label">Saldo</p>
                         <h3 className="text-gradient-primary">Rp {balance.toLocaleString()}</h3>
                     </div>
                 </div>
             </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 content-wrapper">
 
                 {/* Left Column: Input */}
                 <div className="md:col-span-2 space-y-8">
@@ -179,7 +179,7 @@ export default function Dashboard() {
                         className="card"
                     >
                         <h3 className="mb-4 flex items-center gap-2">
-                            <FiPlus /> New Record
+                            <FiPlus /> Catatan Baru
                         </h3>
 
                         <form onSubmit={handleSubmit}>
@@ -187,7 +187,7 @@ export default function Dashboard() {
                                 <textarea
                                     className="input-field"
                                     rows="3"
-                                    placeholder="Describe your expense (e.g., 'Lunch at McD 50k') or upload a receipt..."
+                                    placeholder="Deskripsikan pengeluaranmu (misal: 'Makan di McD 50rb') atau upload struk..."
                                     value={prompt}
                                     onChange={(e) => setPrompt(e.target.value)}
                                     style={{ resize: 'none', paddingRight: '4rem' }}
@@ -200,7 +200,7 @@ export default function Dashboard() {
                                         onClick={() => fileInputRef.current.click()}
                                         className="btn btn-outline"
                                         style={{ padding: '0.5rem', borderRadius: '50%' }}
-                                        title="Upload Receipt or PDF"
+                                        title="Upload Struk atau PDF"
                                     >
                                         <FiImage size={20} />
                                     </button>
@@ -250,7 +250,7 @@ export default function Dashboard() {
                                     disabled={loading || (!prompt && !file)}
                                     className="btn btn-primary w-full md:w-auto"
                                 >
-                                    {loading ? <div className="loader"></div> : <><FiSend /> Analyze & Add</>}
+                                    {loading ? <div className="loader"></div> : <><FiSend /> Analisis & Tambah</>}
                                 </button>
                             </div>
                         </form>
@@ -258,11 +258,11 @@ export default function Dashboard() {
 
                     {/* Transactions List */}
                     <div>
-                        <h3 className="mb-4">Recent Transactions</h3>
+                        <h3 className="mb-4">Transaksi Terakhir</h3>
                         <div className="flex flex-col gap-3">
                             <AnimatePresence>
                                 {transactions.length === 0 && (
-                                    <p className="text-center opacity-50 py-10">No transactions yet. Upload a receipt or type a note!</p>
+                                    <p className="text-center opacity-50 py-10">Belum ada transaksi. Upload struk atau ketik catatan!</p>
                                 )}
                                 {transactions.map((t) => (
                                     <motion.div
@@ -281,7 +281,7 @@ export default function Dashboard() {
                                                 {t.type?.toLowerCase() === 'income' ? <FiTrendingUp /> : <FiTrendingDown />}
                                             </div>
                                             <div>
-                                                <h4 style={{ fontSize: '1.1rem', marginBottom: '0.2rem' }}>{t.merchant || t.summary || "Unknown"}</h4>
+                                                <h4 style={{ fontSize: '1.1rem', marginBottom: '0.2rem' }}>{t.merchant || t.summary || "Tidak Diketahui"}</h4>
                                                 <p style={{ fontSize: '0.875rem' }}>{t.date} • {t.category}</p>
                                             </div>
                                         </div>
@@ -303,11 +303,11 @@ export default function Dashboard() {
                     {/* Summary Cards */}
                     <div className="grid grid-cols-2 gap-4">
                         <div className="card text-center p-4">
-                            <p className="text-sm text-green-400 mb-1">Income</p>
+                            <p className="text-sm text-green-400 mb-1">Pemasukan</p>
                             <h4 className="text-xl">Rp {income.toLocaleString()}</h4>
                         </div>
                         <div className="card text-center p-4">
-                            <p className="text-sm text-rose-400 mb-1">Expenses</p>
+                            <p className="text-sm text-rose-400 mb-1">Pengeluaran</p>
                             <h4 className="text-xl">Rp {expense.toLocaleString()}</h4>
                         </div>
                     </div>
@@ -318,14 +318,14 @@ export default function Dashboard() {
                         animate={{ opacity: 1, scale: 1 }}
                         className="card"
                     >
-                        <h3 className="mb-4 flex items-center gap-2"><FiActivity /> Expense Breakdown</h3>
+                        <h3 className="mb-4 flex items-center gap-2"><FiActivity /> Rincian Pengeluaran</h3>
                         {Object.keys(expensesByCategory).length > 0 ? (
                             <div className="relative h-64 w-full flex justify-center">
                                 <Doughnut data={chartData} options={chartOptions} />
                             </div>
                         ) : (
                             <div className="h-40 flex items-center justify-center text-slate-500">
-                                No expense data yet
+                                Belum ada data pengeluaran
                             </div>
                         )}
                     </motion.div>
@@ -338,14 +338,14 @@ export default function Dashboard() {
                     >
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="flex items-center gap-2">
-                                AI Insights
+                                Analisis Keuangan AI
                             </h3>
                             <button
                                 onClick={generateInsights}
                                 disabled={loadingInsights || transactions.length === 0}
                                 className="text-sm text-primary hover:text-white transition-colors"
                             >
-                                {loadingInsights ? "Thinking..." : "Refresh"}
+                                {loadingInsights ? "Berpikir..." : "Perbarui"}
                             </button>
                         </div>
 
@@ -358,14 +358,19 @@ export default function Dashboard() {
                         ) : (
                             <div className="text-center text-slate-500 py-6">
                                 {transactions.length > 0
-                                    ? "Click Refresh to get AI analysis of your spending."
-                                    : "Add some transactions to unlock AI insights!"}
+                                    ? "Klik Perbarui untuk analisa AI."
+                                    : "Tambah transaksi untuk membuka wawasan AI!"}
                             </div>
                         )}
                     </motion.div>
                 </div>
 
             </div>
+
+            {/* Footer */}
+            <footer className="mt-20 text-center text-slate-500 text-sm pb-8">
+                &copy; {new Date().getFullYear()} UangKu by Ghina.
+            </footer>
         </div>
     );
 }
